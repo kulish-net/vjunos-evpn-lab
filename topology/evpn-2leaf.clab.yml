@@ -1,0 +1,43 @@
+# Two cJunosEvolved leaves back to back, EVPN-VXLAN between them.
+# Stage two: prove the data plane really encapsulates, before adding a spine.
+#
+# Interface mapping is the Linux side in this file and the Junos side in the
+# configs: eth4 = et-0/0/0, eth5 = et-0/0/1. eth1-eth3 are reserved, never use.
+name: evpn2
+
+topology:
+  kinds:
+    juniper_cjunosevolved:
+      image: cjunosevolved:26.2R1.7-EVO
+
+  nodes:
+    leaf1:
+      kind: juniper_cjunosevolved
+      startup-config: leaf1.conf
+    leaf2:
+      kind: juniper_cjunosevolved
+      startup-config: leaf2.conf
+
+    h1:
+      kind: linux
+      image: alpine:3.20
+      exec:
+        - ip link set eth1 up
+        - ip link add link eth1 name eth1.10 type vlan id 10
+        - ip link set eth1.10 up
+        - ip addr add 10.10.10.1/24 dev eth1.10
+    h2:
+      kind: linux
+      image: alpine:3.20
+      exec:
+        - ip link set eth1 up
+        - ip link add link eth1 name eth1.10 type vlan id 10
+        - ip link set eth1.10 up
+        - ip addr add 10.10.10.2/24 dev eth1.10
+
+  links:
+    # underlay, et-0/0/0 on both sides
+    - endpoints: ["leaf1:eth4", "leaf2:eth4"]
+    # access ports, et-0/0/1
+    - endpoints: ["leaf1:eth5", "h1:eth1"]
+    - endpoints: ["leaf2:eth5", "h2:eth1"]

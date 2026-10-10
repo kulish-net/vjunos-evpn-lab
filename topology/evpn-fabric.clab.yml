@@ -1,0 +1,44 @@
+# ЧЕРНОВИК - не прогонялся.
+# Образ сменён с vJunos-switch на cJunosEvolved: vJunos-switch по документации
+# не поддерживается при запуске изнутри ВМ (глубокая вложенность), а WSL2 -
+# это ВМ. Имя kind и тег образа подтверждаются на стенде. См. README.
+name: evpn-fabric
+
+topology:
+  kinds:
+    juniper_cjunosevolved:          # <- точное имя kind проверить в containerlab
+      image: cjunosevolved:25.2R1   # <- тег сверить с тем, что отдаёт Juniper
+      # требования Juniper: минимум 4 ядра и 8 ГБ на узел
+      env:
+        CJUNOS_CPU: 4
+        CJUNOS_MEMORY: 8192
+
+  nodes:
+    spine1:
+      kind: juniper_cjunosevolved
+      startup-config: ../configs/spine1.conf
+    leaf1:
+      kind: juniper_cjunosevolved
+      startup-config: ../configs/leaf1.conf
+    leaf2:
+      kind: juniper_cjunosevolved
+      startup-config: ../configs/leaf2.conf
+
+    h1:
+      kind: linux
+      image: alpine:3.20
+      exec:
+        - ip addr add 10.10.10.1/24 dev eth1
+    h2:
+      kind: linux
+      image: alpine:3.20
+      exec:
+        - ip addr add 10.10.10.2/24 dev eth1
+
+  links:
+    # underlay: spine - leaf
+    - endpoints: ["spine1:et-0/0/0", "leaf1:et-0/0/0"]
+    - endpoints: ["spine1:et-0/0/1", "leaf2:et-0/0/0"]
+    # хосты в VLAN 10 -> VNI 10010
+    - endpoints: ["leaf1:et-0/0/2", "h1:eth1"]
+    - endpoints: ["leaf2:et-0/0/2", "h2:eth1"]

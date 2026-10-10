@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 400" width="880" height="400" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Roboto, sans-serif">
+  <rect width="880" height="400" fill="#ffffff"/>
+
+  <!-- overlay arc -->
+  <path d="M 265 150 C 265 60, 615 60, 615 150" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="7 5"/>
+  <text x="440" y="66" text-anchor="middle" font-size="14" fill="#2563eb" font-weight="600">eBGP overlay: lo0 &#8596; lo0, family evpn signaling</text>
+  <text x="440" y="88" text-anchor="middle" font-size="13" fill="#2563eb">туннель VXLAN, VNI 10010</text>
+
+  <!-- hosts -->
+  <rect x="24" y="178" width="118" height="62" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+  <text x="83" y="203" text-anchor="middle" font-size="15" fill="#0f172a" font-weight="600">h1</text>
+  <text x="83" y="223" text-anchor="middle" font-size="12.5" fill="#475569" font-family="ui-monospace, monospace">10.10.10.1/24</text>
+
+  <rect x="738" y="178" width="118" height="62" rx="8" fill="#f1f5f9" stroke="#64748b" stroke-width="1.5"/>
+  <text x="797" y="203" text-anchor="middle" font-size="15" fill="#0f172a" font-weight="600">h2</text>
+  <text x="797" y="223" text-anchor="middle" font-size="12.5" fill="#475569" font-family="ui-monospace, monospace">10.10.10.2/24</text>
+
+  <!-- leaves -->
+  <rect x="196" y="150" width="138" height="118" rx="10" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+  <text x="265" y="176" text-anchor="middle" font-size="16" fill="#0f172a" font-weight="700">leaf1</text>
+  <text x="265" y="197" text-anchor="middle" font-size="12" fill="#475569">PTX10001-36MR</text>
+  <text x="265" y="220" text-anchor="middle" font-size="12.5" fill="#0f172a" font-family="ui-monospace, monospace">lo0 10.0.0.1/32</text>
+  <text x="265" y="240" text-anchor="middle" font-size="12.5" fill="#0f172a" font-family="ui-monospace, monospace">AS 65001</text>
+  <text x="265" y="259" text-anchor="middle" font-size="12" fill="#475569">MAC-VRF, VNI 10010</text>
+
+  <rect x="546" y="150" width="138" height="118" rx="10" fill="#ffffff" stroke="#0f172a" stroke-width="2"/>
+  <text x="615" y="176" text-anchor="middle" font-size="16" fill="#0f172a" font-weight="700">leaf2</text>
+  <text x="615" y="197" text-anchor="middle" font-size="12" fill="#475569">PTX10001-36MR</text>
+  <text x="615" y="220" text-anchor="middle" font-size="12.5" fill="#0f172a" font-family="ui-monospace, monospace">lo0 10.0.0.2/32</text>
+  <text x="615" y="240" text-anchor="middle" font-size="12.5" fill="#0f172a" font-family="ui-monospace, monospace">AS 65002</text>
+  <text x="615" y="259" text-anchor="middle" font-size="12" fill="#475569">MAC-VRF, VNI 10010</text>
+
+  <!-- access links -->
+  <line x1="142" y1="209" x2="196" y2="209" stroke="#0f172a" stroke-width="2"/>
+  <line x1="684" y1="209" x2="738" y2="209" stroke="#0f172a" stroke-width="2"/>
+  <text x="169" y="200" text-anchor="middle" font-size="11.5" fill="#475569" font-family="ui-monospace, monospace">VLAN 10</text>
+  <text x="711" y="200" text-anchor="middle" font-size="11.5" fill="#475569" font-family="ui-monospace, monospace">VLAN 10</text>
+
+  <!-- underlay link -->
+  <line x1="334" y1="209" x2="546" y2="209" stroke="#0f172a" stroke-width="2"/>
+  <text x="440" y="199" text-anchor="middle" font-size="13" fill="#0f172a" font-weight="600">eBGP underlay</text>
+  <text x="440" y="228" text-anchor="middle" font-size="12.5" fill="#475569" font-family="ui-monospace, monospace">10.255.0.0/31</text>
+
+  <!-- interface naming note -->
+  <rect x="196" y="300" width="488" height="66" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="1.5"/>
+  <text x="440" y="322" text-anchor="middle" font-size="13" fill="#92400e" font-weight="600">Имена в двух системах координат</text>
+  <text x="440" y="342" text-anchor="middle" font-size="12.5" fill="#92400e" font-family="ui-monospace, monospace">в топологии: eth4, eth5 &#8594; в конфиге: et-0/0/0, et-0/0/1</text>
+  <text x="440" y="359" text-anchor="middle" font-size="12" fill="#92400e">eth1&#8211;eth3 зарезервированы, использовать нельзя</text>
+
+  <text x="265" y="289" text-anchor="middle" font-size="11.5" fill="#64748b" font-family="ui-monospace, monospace">et-0/0/1 = eth5</text>
+  <text x="615" y="289" text-anchor="middle" font-size="11.5" fill="#64748b" font-family="ui-monospace, monospace">et-0/0/1 = eth5</text>
+  <text x="378" y="289" text-anchor="middle" font-size="11.5" fill="#64748b" font-family="ui-monospace, monospace">et-0/0/0 = eth4</text>
+</svg>

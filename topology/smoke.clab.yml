@@ -1,0 +1,10 @@
+# Smoke test: a single cJunosEvolved node, no links.
+# Purpose is narrow - prove the image boots under this host (WSL2 on AMD) and
+# measure how long containerlab waits for it. Do not add nodes here.
+name: smoke
+
+topology:
+  nodes:
+    cjunos1:
+      kind: juniper_cjunosevolved
+      image: cjunosevolved:26.2R1.7-EVO

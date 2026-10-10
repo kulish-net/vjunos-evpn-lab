@@ -1,0 +1,17 @@
+# lab runtime state
+clab-*/
+.clab/
+*.log
+*.pcap
+measure/results/
+
+# images are never committed - they are built locally from the Juniper qcow2
+*.qcow2
+*.tgz
+
+# editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
