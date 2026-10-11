@@ -11,6 +11,9 @@ and what actually determines that number?*
 
 Spoiler: not the VXLAN data plane. BGP timers and BFD.
 
+A write-up of this lab, in Russian:
+[habr.com/ru/articles/1092896](https://habr.com/ru/articles/1092896/)
+
 ## Topology
 
 ```
